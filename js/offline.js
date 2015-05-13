@@ -163,7 +163,9 @@
   checkXHR = function(xhr, onUp, onDown) {
     var checkStatus, _onerror, _onload, _onreadystatechange, _ontimeout;
     checkStatus = function() {
-      if (xhr.status && xhr.status < 12000) {
+      if (xhr.status && xhr.status >= 501 && xhr.status <= 599) {
+        return onDown();
+      } else if (xhr.status && xhr.status < 12000) {
         return onUp();
       } else {
         return onDown();
